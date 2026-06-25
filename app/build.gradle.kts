@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "com.mobile_template"
+    namespace = "{{PACKAGE_NAME}}"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.mobile_template"
+        applicationId = "{{PACKAGE_NAME}}"
         minSdk = 33
         targetSdk = 36
         versionCode = 1

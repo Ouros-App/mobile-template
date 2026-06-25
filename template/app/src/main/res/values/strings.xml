@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">{{APP_LABEL}}</string>
-    <string name="home_title">Template Kotlin + XML</string>
-    <string name="home_subtitle">Base limpa com ViewBinding pronta para crescer.</string>
-</resources>

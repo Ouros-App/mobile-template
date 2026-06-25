@@ -29,14 +29,25 @@ if [[ -z "$project_name" || -z "$app_label" || -z "$package_name" || -z "$app_cl
 fi
 
 package_path="${package_name//.//}"
-tpl_dir="$root_dir/template"
 work_dir="${2:-$root_dir/out/$project_name}"
 
 rm -rf "$work_dir"
 mkdir -p "$work_dir"
-cp -R "$tpl_dir"/. "$work_dir"/
+rsync -a \
+  --exclude '.git/' \
+  --exclude '.idea/' \
+  --exclude 'out/' \
+  --exclude 'scripts/' \
+  --exclude 'template/' \
+  --exclude 'template.config.example.json' \
+  --exclude 'local.properties' \
+  --exclude 'gradle.properties' \
+  --exclude 'app/src/main/java/com/mobile_template/' \
+  --exclude 'app/src/test/java/com/mobile_template/' \
+  --exclude 'app/src/androidTest/java/com/mobile_template/' \
+  "$root_dir"/ "$work_dir"/
 
-find "$work_dir" -type f \( -name '*.kt' -o -name '*.kts' -o -name '*.xml' -o -name 'README.md' \) -print0 | while IFS= read -r -d '' f; do
+find "$work_dir" -type f \( -name '*.kt' -o -name '*.kts' -o -name '*.xml' -o -name 'README.md' -o -name '*.json' -o -name 'local.properties.example' \) -print0 | while IFS= read -r -d '' f; do
   perl -0pi -e "s/\{\{PROJECT_NAME\}\}/$(esc_perl "$project_name")/g; s/\{\{APP_LABEL\}\}/$(esc_perl "$app_label")/g; s/\{\{PACKAGE_NAME\}\}/$(esc_perl "$package_name")/g; s/\{\{PACKAGE_PATH\}\}/$(esc_perl "$package_path")/g; s/\{\{APPLICATION_CLASS_NAME\}\}/$(esc_perl "$app_class")/g" "$f"
 done
 
