@@ -1,39 +1,99 @@
-# {{PROJECT_NAME}}
+# Mobile Template
 
-Template Android nativo em Kotlin + XML, pensado para virar um repositório base no GitHub.
+Template de aplicativo Android nativo em Kotlin e XML, preparado para gerar novos projetos a partir de valores de configuração.
 
-## O que ele entrega
+## Status e escopo
 
-- `MainActivity` e classes genéricas já prontas como ponto de partida
-- `ViewBinding` habilitado
-- tema Material3 básico
-- `local.properties.example` para configurar o SDK sem versionar arquivo local
-- script de inicialização para substituir os valores dinâmicos do template
+Este repositório é um template parametrizado. Os arquivos usam placeholders como {{PROJECT_NAME}}, {{APP_LABEL}}, {{PACKAGE_NAME}}, {{PACKAGE_PATH}} e {{APPLICATION_CLASS_NAME}}; o script de inicialização substitui esses valores em uma cópia de saída.
 
-## O que muda por projeto
+## Principais componentes
 
-- `{{PROJECT_NAME}}`
-- `{{APP_LABEL}}`
-- `{{PACKAGE_NAME}}`
-- `{{PACKAGE_PATH}}`
-- `{{APPLICATION_CLASS_NAME}}`
+- Módulo Android app com MainActivity, LoginActivity, HomeFragment, MainViewModel, MainRepository, ApiClient, AppTheme e a classe de aplicação parametrizada.
+- ViewBinding habilitado.
+- Dependências AndroidX Core KTX, AppCompat, Material e ConstraintLayout.
+- Layout inicial activity_main.xml e recursos de valores, tema, tema noturno e drawables/mipmap.
+- Exemplos de teste local em app/src/test e de teste instrumentado em app/src/androidTest.
+- Gradle Wrapper para execução do projeto sem versionar uma instalação local do Gradle.
 
-## Estrutura
+## Pré-requisitos
 
-- `app/` código e recursos Android
-- `scripts/init-template.sh` inicialização do template
-- `template.config.example.json` exemplo de configuração
-- `local.properties.example` exemplo de configuração local do Android Studio
+- Android Studio e Android SDK.
+- O projeto está configurado para compilar e direcionar para SDK 36, com minSdk 33.
+- A configuração de compilação usa compatibilidade com Java 11.
+- Para executar scripts/init-template.sh, é necessário um shell Bash com rsync e perl disponíveis.
 
-## Como usar
+## Configuração do template
 
-1. Copie `template.config.example.json` para `template.config.json`
-2. Ajuste `projectName`, `appLabel`, `packageName` e `applicationClassName`
-3. Copie `local.properties.example` para `local.properties` se for abrir o projeto no Android Studio
-4. Rode `scripts/init-template.sh`
+Copie o arquivo de configuração de exemplo e edite os valores:
 
-## Observações
+~~~bash
+cp template.config.example.json template.config.json
+~~~
 
-- O script substitui os placeholders e gera uma cópia pronta do template em `out/`
-- O nome das classes genéricas não é dinâmico de propósito
-- Se quiser montar um novo projeto manualmente, os únicos pontos que dependem do nome do app estão nos placeholders acima
+O arquivo template.config.json deve fornecer:
+
+| Campo | Finalidade |
+| --- | --- |
+| projectName | Nome do projeto gerado. |
+| appLabel | Nome exibido pelo aplicativo. |
+| packageName | Nome do pacote Android. |
+| applicationClassName | Nome da classe de aplicação. |
+
+Para abrir o projeto no Android Studio, copie também local.properties.example para local.properties e ajuste sdk.dir para o caminho do Android SDK local:
+
+~~~bash
+cp local.properties.example local.properties
+~~~
+
+local.properties é local e não deve ser versionado.
+
+## Geração e uso
+
+Com template.config.json preenchido, execute:
+
+~~~bash
+bash scripts/init-template.sh
+~~~
+
+O script aceita opcionalmente o caminho do arquivo de configuração como primeiro argumento e o diretório de saída como segundo argumento:
+
+~~~bash
+bash scripts/init-template.sh caminho/para/template.config.json caminho/para/saida
+~~~
+
+Sem o segundo argumento, a saída é criada em out/<projectName>. A cópia gerada remove os arquivos e diretórios exclusivos de inicialização do template, substitui os placeholders, reorganiza o diretório do pacote e renomeia a classe de aplicação. Ao executar novamente para o mesmo destino, o diretório de saída é removido e recriado.
+
+Depois da geração, abra o diretório de saída no Android Studio. O repositório fornece os wrappers gradlew e gradlew.bat.
+
+## Testes e qualidade
+
+Há um teste unitário de exemplo em app/src/test e um teste instrumentado de exemplo em app/src/androidTest. Não há workflow de CI configurado no diretório .github/workflows; a pasta .github contém apenas o template de pull request.
+
+## Estrutura do projeto
+
+~~~text
+app/
+  src/main/
+    AndroidManifest.xml
+    java/{{PACKAGE_PATH}}/
+    res/
+  src/test/
+  src/androidTest/
+  build.gradle.kts
+gradle/
+  libs.versions.toml
+scripts/
+  init-template.sh
+template.config.example.json
+local.properties.example
+gradlew
+gradlew.bat
+~~~
+
+## Contribuição
+
+Preserve os placeholders e o fluxo de geração ao alterar o template. Mudanças no projeto gerado devem ser refletidas na documentação e nos exemplos correspondentes.
+
+## Licença
+
+Este projeto está sob a licença MIT. Consulte LICENSE para o texto completo.
