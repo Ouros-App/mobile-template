@@ -1,5 +1,17 @@
 # Mobile Template
 
+<!-- REPO-METADATA:START -->
+<div align="center">
+
+[![Repo Size](https://img.shields.io/github/repo-size/Ouros-App/mobile-template?style=flat-square&label=REPO%20SIZE)](https://github.com/Ouros-App/mobile-template)
+[![Languages](https://img.shields.io/github/languages/count/Ouros-App/mobile-template?style=flat-square&label=LANGUAGES)](https://github.com/Ouros-App/mobile-template/languages)
+[![Forks](https://img.shields.io/github/forks/Ouros-App/mobile-template?style=flat-square&label=FORKS)](https://github.com/Ouros-App/mobile-template/network/members)
+[![Issues](https://img.shields.io/github/issues/Ouros-App/mobile-template?style=flat-square&label=ISSUES)](https://github.com/Ouros-App/mobile-template/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/Ouros-App/mobile-template?style=flat-square&label=PULL%20REQUESTS)](https://github.com/Ouros-App/mobile-template/pulls)
+
+</div>
+<!-- REPO-METADATA:END -->
+
 Template de aplicativo Android nativo em Kotlin e XML, preparado para gerar novos projetos a partir de valores de configuração.
 
 ## Status e escopo
@@ -97,3 +109,12 @@ Preserve os placeholders e o fluxo de geração ao alterar o template. Mudanças
 ## Licença
 
 Este projeto está sob a licença MIT. Consulte LICENSE para o texto completo.
+
+
+## Principais contribuidores
+
+<!-- CONTRIBUTORS:START -->
+- [@Nicolas25vlad](https://github.com/Nicolas25vlad) — 12 contribuições
+<!-- CONTRIBUTORS:END -->
+
+> Atualizado automaticamente semanalmente pelo workflow de metadados do README.
